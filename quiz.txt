@@ -1,0 +1,2 @@
+I think the first one is the better way to render a component.
+Due to component should be reuseable and it is just for receiving props from parent to render view.
