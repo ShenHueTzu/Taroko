@@ -1,5 +1,6 @@
 import React from "react";
 import App from "next/app";
+import Head from 'next/head';
 import withReduxSaga from "next-redux-saga";
 
 import GlobalStyle from "./_globalStyle";
@@ -20,6 +21,10 @@ class MainApp extends App {
 
     return (
       <>
+        <Head>
+          <meta name="viewport" content="viewport-fit=cover" />
+          <meta charSet="utf-8" />
+        </Head>
         <GlobalStyle />
         <Component {...pageProps} />
       </>
