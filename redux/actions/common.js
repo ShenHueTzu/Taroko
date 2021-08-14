@@ -8,8 +8,8 @@ export const closeModal = () => {
   return { type: commonTypes.CLOSE_MODAL };
 };
 
-export const openToast = () => {
-  return { type: commonTypes.OPEN_TOAST };
+export const openToast = (payload) => {
+  return { type: commonTypes.OPEN_TOAST, payload };
 };
 
 export const closeToast = () => {

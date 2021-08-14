@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
@@ -8,12 +8,16 @@ import {
  import { openModal as openModalAction } from "../../redux/actions/common";
 
 import Filter from "../../components/Filter";
+import Status from "../../components/ListStatus";
 import Loader from "../../components/Loader";
 import ItemComp from "../../components/Item";
 
 import { Wrapper, Title, Group } from "./styled";
 
 const List = () => {
+  const timerRef = useRef();
+  const [isInit, setIsInit] = useState(true);
+
   const { list, isFetching } = useSelector((state) => state.list);
   const dispatch = useDispatch();
   const openModal = (data) => dispatch(openModalAction(data));
@@ -21,10 +25,18 @@ const List = () => {
   const setList = (data) => dispatch(setListAction(data));
 
   useEffect(() => {
-    if (!list) getList();
+    timerRef.current = setTimeout(() => {
+      setIsInit(false);
+    }, 5000);
+
+    return () => {
+      clearTimeout(timerRef.current);
+    };
   }, []);
 
-  if (!list || isFetching) return <Loader />;
+  useEffect(() => {
+    if (isInit) getList(); 
+  }, [isInit]);
 
   const handleEdit = (id) => {
     openModal({ modalType: "editConfirm", modalData: id })
@@ -36,7 +48,6 @@ const List = () => {
 
   const handleFilter = (e) => {
     let listCopy = [...list];
-    console.log(e.target.value);
     if (e.target.value === "asc") {
       listCopy.sort((a, b) => a.first_name.localeCompare(b.first_name));
     } 
@@ -45,6 +56,10 @@ const List = () => {
     }
     setList(listCopy);
   };
+
+  if (isFetching) return <Loader />;
+  if (!isFetching && list && list.length < 1) return <Status type="empty" />;
+  if (!isFetching && !list) return <Status type="fetchError" />;
 
   return (
     <Wrapper>

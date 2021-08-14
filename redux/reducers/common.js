@@ -21,9 +21,9 @@ const common = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
       case OPEN_TOAST:
+        console.log(action.payload);
         draft.isToast = true;
-        draft.toastType = action.payload;
-        draft.toastData = action.data;
+        draft.toastType = action.payload.toastType;
         break;
       case CLOSE_TOAST:
         draft.isToast = false;

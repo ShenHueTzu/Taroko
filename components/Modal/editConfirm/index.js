@@ -6,6 +6,7 @@ import {
   getContact as getContactAction,
   resetInfo as resetInfoAction,
 } from "../../../redux/actions/list";
+import { openToast as openToastAction } from "../../../redux/actions/common";
 
 import InputField from "../../InputField";
 import Button from "../../Button";
@@ -23,6 +24,7 @@ const EditConfirm = ({ onModalClose, data }) => {
   const putList = (data) => dispatch(putListAction(data));
   const getContact = (data) => dispatch(getContactAction(data));
   const resetInfo = () => dispatch(resetInfoAction());
+  const openToast = (data) => dispatch(openToastAction(data));
 
   useEffect(() => {
     getContact(data);
@@ -45,14 +47,14 @@ const EditConfirm = ({ onModalClose, data }) => {
 
   const onUpdate = (e, key) => {
     let infosCopy = {...infos};
-    if (e.target.value) {
-      infosCopy[key] = e.target.value;
-      setInfo(infosCopy);
-    }
+    infosCopy[key] = e.target.value;
+    setInfo(infosCopy);
   };
 
   const onEdit = () => {
-    if (Object.values(infos).filter((itm) => itm === "").length > 0) return console.log("error");
+    if (Object.values(infos).filter((itm) => itm === "").length > 0) {
+      return openToast({ toastType: "emptyField" });
+    }
 
     putList({ info: infos, id: data });
     onModalClose();

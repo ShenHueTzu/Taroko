@@ -1,7 +1,7 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import * as listApi from "../../apis/list";
 import * as actionTypes from "../../constants/actionTypes";
-// import toastStatus from "../../constants/toast";
+import * as commonTypes from "../../constants/commonTypes";
 
 function* getList() {
   try {
@@ -38,10 +38,14 @@ function* postList({ data }) {
     if (res.data) {
       yield put({ type: actionTypes.POST_LIST_SUC });
       yield put({ type: actionTypes.GET_LIST });
+      const toastType = "contactCreateSuc";
+      yield put({ type: commonTypes.OPEN_TOAST, payload: { toastType } });
       return;
     }
   } catch (error) {
     yield put({ type: actionTypes.POST_LIST_FAL });
+    const toastType = "contactCreateFal";
+    yield put({ type: commonTypes.OPEN_TOAST, payload: { toastType } });
     console.log(error);
   }
 }
@@ -53,10 +57,15 @@ function* putList({ data }) {
     if (res.data) {
       yield put({ type: actionTypes.PUT_LIST_SUC });
       yield put({ type: actionTypes.GET_LIST });
+
+      const toastType = "contactUpdateSuc";
+      yield put({ type: commonTypes.OPEN_TOAST, payload: { toastType } });
       return;
     }
   } catch (error) {
     yield put({ type: actionTypes.PUT_LIST_FAL });
+    const toastType = "contactUpdateFal";
+    yield put({ type: commonTypes.OPEN_TOAST, payload: { toastType } });
     console.log(error);
   }
 }
@@ -69,10 +78,14 @@ function* delList({ data }) {
     if (res.data) {
       yield put({ type: actionTypes.DEL_LIST_SUC });
       yield put({ type: actionTypes.GET_LIST });
+      const toastType = "contactDeleteSuc";
+      yield put({ type: commonTypes.OPEN_TOAST, payload: { toastType } });
       return;
     }
   } catch (error) {
     yield put({ type: actionTypes.DEL_LIST_FAL });
+    const toastType = "contactDeleteFal";
+      yield put({ type: commonTypes.OPEN_TOAST, payload: { toastType } });
     console.log(error);
   }
 }

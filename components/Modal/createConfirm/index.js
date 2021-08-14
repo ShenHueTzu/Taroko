@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { postList as postListAction } from "../../../redux/actions/list";
+import { openToast as openToastAction } from "../../../redux/actions/common";
 
 import InputField from "../../InputField";
 import Button from "../../Button";
@@ -16,17 +17,18 @@ const CreateConfirm = ({ onModalClose }) => {
   });
   const dispatch = useDispatch();
   const postList = (data) => dispatch(postListAction(data));
+  const openToast = (data) => dispatch(openToastAction(data));
 
   const onUpdate = (e, key) => {
-    if (e.target.value) {
-      const infosCopy = {...infos};
-      infosCopy[key] = e.target.value;
-      setInfo(infosCopy);
-    }
+    const infosCopy = {...infos};
+    infosCopy[key] = e.target.value;
+    setInfo(infosCopy);
   };
 
   const onAdd = () => {
-    if (Object.values(infos).filter((itm) => itm === "").length > 0) return console.log("error");
+    if (Object.values(infos).filter((itm) => itm === "").length > 0) {
+      return openToast({ toastType: "emptyField" });
+    }
 
     postList({ contact: infos });
     onModalClose();
