@@ -1,34 +1,87 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Taroko
 
-## Getting Started
+===
 
-First, run the development server:
+## Table of Contents
 
-```bash
-npm run dev
-# or
-yarn dev
+- [Taroko](#taroko)
+  - [Table of Contents](#table-of-contents)
+  - [Getting Start](#getting-start)
+  - [2. visit http://localhost:3000 with browser](#2-visit-httplocalhost3000-with-browser)
+  - [Introduction](#introduction)
+  - [Folder Structure](#folder-structure)
+  - [Styles and Layouts](#styles-and-layouts)
+  - [Features](#features)
+  - [Coding Rule](#coding-rule)
+  - [Redux and Redux-Saga](#redux-and-redux-saga)
+  - [Deploy](#deploy)
+
+---
+## Getting Start
+
+1. install dependency package in project
+  > yarn
+2. visit http://localhost:3000 with browser
+---
+## Introduction
+  Taroko demo.
+  With CRUD and filter functions.
+---
+## Folder Structure
 ```
+.
+├── README.md
+├── apis
+├── config
+├── redux
+│   ├── actions
+│   ├── reducers
+│   └── sagas
+├── containers
+├── components
+├── next.config.js
+├── .eslintrc.js
+├── node_modules
+├── quiz.txt
+│   └── [...]
+├── package.json
+├── pages
+│   ├── index.js
+│   ├── _app.js
+│   ├── _document.js
+│   └── _globalStyle.js
+├── public
+│   └── favicon.ico
+└── yarn.lock
+```
+---
+## Styles and Layouts
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Using style-components with next.js.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+---
+Read more about [styled-components](https://github.com/styled-components/styled-components).
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Features
+Using next.js with react hook and redux.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+---
 
-## Learn More
+## Coding Rule
+create .eslintrc.js
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Redux and Redux-Saga
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Using Redux manages status.
+We call an action to change the status. However, in some complicated situations, we use redux-saga which is a middleware, for simplifying actions and reducers. With effects api listening action and acting some logics return a new result stored into redux saga.
 
-## Deploy on Vercel
+[Redux-saga](https://github.com/redux-saga/redux-saga)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
+## Deploy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[heroku](https://taroko-demo.herokuapp.com/)
+
+---
